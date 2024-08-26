@@ -3,15 +3,30 @@ import CommentorIcon from "../../../assets/commentor.png";
 import { formatDate } from "../../../utilis/dateFormater";
 import PostAComment from "./PostAComment";
 import { useSelector } from "react-redux";
+import { RiDeleteBinLine } from "react-icons/ri";
+import { useDeleteCommentMutation} from "../../../redux/features/comments/commentsApi";
 
 const CommentCard = ({ comments }) => {
   const user = useSelector((state) => state.auth.user); 
-  console.log(user?.username)
-  // console.log(comments);
-
+  const [deleteComment] = useDeleteCommentMutation();
+  console.log(comments);
+  const handledeletecomment = async(commentid) =>{
+    try {
+      // console.log("entered funcction");
+      const response = await deleteComment(commentid).unwrap();
+      alert("comment deleted sucessfully!")
+      // console.log(response);
+      window.location.reload();
+    } 
+    catch (error) {
+      console.log("Error deleting comment");
+    }
+  }
   return (
     <div className="my-6 bg-white p-8">
-     <div>
+     <div>{
+      
+     }
       {
         comments.length > 0 ? <div>
            <h3 className="text-lg font-medium">All Comments...</h3>
@@ -21,15 +36,21 @@ const CommentCard = ({ comments }) => {
             <div className="flex gap-4 items-center">
               <img src={CommentorIcon} alt="" className="h-14" />
               <div className="space-y-1">
-                <p className="text-lg font-medium underline capitalize underline-offset-4 text-blue-400">
-                  {comment.user.username}
-                </p>
+              <div className="flex justify-between items-center">
+                  <p className="text-lg font-medium underline capitalize underline-offset-4 text-blue-400">
+                    {comment.user.username}
+                  </p>
+                  {user?.role === 'admin' && (
+                    <button onClick={() => handledeletecomment(comment._id)}>
+                      <RiDeleteBinLine />
+                    </button>
+                  )}
+                </div>
                 <p className="text-[12px] italic">
                   {formatDate(comment.createdAt)}
                 </p>
-              </div>
             </div>
-
+            </div>
             {/* comment details */}
             <div className="text-gray-600 mt-5 border p-8">
               <p className="md:w-4/5">{comment.comment}</p>

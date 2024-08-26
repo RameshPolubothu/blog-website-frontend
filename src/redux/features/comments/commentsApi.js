@@ -4,7 +4,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const commentApi = createApi({
   reducerPath: 'commentApi',
   baseQuery: fetchBaseQuery({ 
-    baseUrl: 'https://blog-website-backend-ebon.vercel.app/api/comments',
+    baseUrl: 'http://localhost:5000/api/comments',
     credentials: 'include',
   }),
   tagTypes: ['Comments'], // Define the tag types
@@ -21,10 +21,17 @@ export const commentApi = createApi({
       query: () => ({
         url: '/total-comments',
       })
+    }),
+    deleteComment: builder.mutation({
+      query : (id) =>({
+          url:`/${id}`,
+          method: 'DELETE',
+          credentials: 'include',
+       })
     })
   }),
 });
 
-export const { usePostCommentMutation, useGetCommentsQuery } = commentApi;
+export const { usePostCommentMutation, useGetCommentsQuery,useDeleteCommentMutation} = commentApi;
 
 export default commentApi;
