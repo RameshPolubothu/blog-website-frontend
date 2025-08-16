@@ -65,9 +65,9 @@ const Navbar = () => {
                 >{list.name}</NavLink>
               </li>
             ))}
-            {user && user?.role === 'user' ? (
+            {/* user role */}
+            {user ?(
               <li className='flex gap-3 items-center'>
-                <img src={AvaterImg} alt="" className='size-8' />
                 <button onClick={handleLogout} className='bg-[#1E73BE] px-4 py-1.5 text-white rounded-sm'>Logout</button>
               </li>
             ) : (
@@ -83,15 +83,42 @@ const Navbar = () => {
               </NavLink>
             </li>
             )}
-            {/* admin */}
+            {
+              user && user?.role === 'user' && (
+                <li className='flex gap-3 items-center'>                
+                  <div className="relative group">
+                    <img 
+                      src={AvaterImg} 
+                      alt="avatar" 
+                      className='size-8 cursor-pointer' 
+                    />
+                    <span className="absolute bottom-full mb-2 hidden group-hover:block bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap">
+                      {user?.username}
+                    </span>
+                  </div>
+                </li>
+              )
+            }
+            {/* admin role*/}
             {user && user?.role === 'admin' && (
-              <li className='flex gap-3 items-center'>
-                <img src={AvaterImg} alt="" className='size-8' />
+              <li className='flex gap-3 items-center'>                
                 <Link to="/dashboard"><button className='bg-[#1E73BE] px-4 py-1.5 text-white rounded-sm'>Dashboard</button></Link>
+                <div className="relative group">
+                    <img 
+                      src={AvaterImg} 
+                      alt="avatar" 
+                      className='size-8 cursor-pointer' 
+                    />
+                    <span className="absolute bottom-full mb-2 hidden group-hover:block bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap">
+                      {user?.username}
+                    </span>
+                  </div>
               </li>
             )}
           </ul>
   
+
+          {/* Mobile menu toggle */}
           <div className='flex items-center sm:hidden'>
             <button
               onClick={toggleMenu}

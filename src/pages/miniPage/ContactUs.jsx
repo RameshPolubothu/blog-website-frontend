@@ -9,7 +9,7 @@ const ContactUs = () => {
 
     <div className="space-y-6">
       <p>
-      For any questions or concerns, please email <a href='mailto:hello@hotels-rooftop.com' className='text-blue-400 italic underline'>emmasmithstay@gmail.com</a> or fill out the form below.
+      For any questions or concerns, please email <a href='mailto:hello@hotels-rooftop.com' className='text-blue-400 italic underline'>rameshp3925@gmail.com</a> or fill out the form below.
       </p>
       <p>
         If you have additional questions or require more information about our

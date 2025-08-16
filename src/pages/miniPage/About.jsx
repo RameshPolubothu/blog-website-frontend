@@ -7,8 +7,8 @@ const About = () => {
         About Us
        </h2>
        <div className='md:px-24'>
-       <img src={AboutImg} alt=""  className='rounded-full'/>
-       <p className='mt-5 text-center md:w-72 text-sm'>Emma Smith</p>
+       <img src={AboutImg} alt=""  className='rounded-full w-40 h-40 object-cover'/>
+       <p className='mt-5 text-center md:w-72 text-sm'>Ramesh Polubothu</p>
        </div>
 
        <div className='mt-10 md:px-24 space-y-8'>

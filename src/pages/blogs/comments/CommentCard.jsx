@@ -5,11 +5,13 @@ import PostAComment from "./PostAComment";
 import { useSelector } from "react-redux";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { useDeleteCommentMutation} from "../../../redux/features/comments/commentsApi";
+import { useNavigate } from "react-router-dom";
 
 const CommentCard = ({ comments }) => {
   const user = useSelector((state) => state.auth.user); 
   const [deleteComment] = useDeleteCommentMutation();
   console.log(comments);
+  const navigate = useNavigate();
   const handledeletecomment = async(commentid) =>{
     try {
       // console.log("entered funcction");
@@ -19,6 +21,11 @@ const CommentCard = ({ comments }) => {
       window.location.reload();
     } 
     catch (error) {
+      console.log(error);
+      if(error.status === 401) {
+        alert('Session Expired');
+        navigate('/login');
+      }
       console.log("Error deleting comment");
     }
   }

@@ -27,7 +27,14 @@ const RegisterForm = () => {
       alert("Registration successful");
       navigate('/login');
     } catch (err) {
-      alert("Registration failed");
+      // console.log(err.status);
+      if (err.status === 400) {
+        alert("Duplicate email or username"); // Display the error message
+      }
+      else{
+        alert("Registration failed");
+      }
+      
     }
   };
 

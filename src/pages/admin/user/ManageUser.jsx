@@ -23,7 +23,7 @@ const ManageUser = () => {
       console.log(response);
       alert("User deleted successfully");
       refetch();
-      navigate("/");
+      navigate("/dashboard/users");
       // Manually refetch users after deletion
     } catch (error) {
       console.error("Failed to delete user", error);

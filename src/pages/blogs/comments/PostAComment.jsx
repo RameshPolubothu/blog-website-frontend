@@ -41,7 +41,15 @@ const PostAComment = () => {
         setComment(''); 
         refetch(); 
     } catch (err) {
-        alert(err.message);
+        console.log(err.status);
+        if(err.status === 401) {
+          alert('Session Expired');
+          navigate('/login');
+        }
+        else{
+          alert(err.message);
+        }
+        
     }
 };
   return (
